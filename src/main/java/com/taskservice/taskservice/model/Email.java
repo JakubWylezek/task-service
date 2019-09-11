@@ -2,21 +2,20 @@ package com.taskservice.taskservice.model;
 
 import com.taskservice.taskservice.constraints.EmailValidation;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 @Data
-@Document("email")
-@NoArgsConstructor
 public class Email {
 
     @Id
-    private String id;
-    @EmailValidation
-    private String email;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Email(String name) {
-        this.email = name;
-    }
+    @EmailValidation
+    private String name;
 }

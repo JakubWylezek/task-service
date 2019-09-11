@@ -1,13 +1,13 @@
 package com.taskservice.taskservice.respository;
 
-import com.taskservice.taskservice.model.Task;
+import com.taskservice.taskservice.model.Border;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long> {
+public interface BorderRepository extends JpaRepository<Border, Long> {
 
-    Optional<Task> getByName(String name);
+    Optional<Border> getByName(String name);
 }

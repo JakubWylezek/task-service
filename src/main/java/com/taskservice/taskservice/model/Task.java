@@ -1,28 +1,33 @@
 package com.taskservice.taskservice.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.List;
 
-@Data
-@Document("task")
-@NoArgsConstructor
+@Getter
+@Setter
+@Entity
 public class Task {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
     private boolean isImportant;
-    private List<Email> emailList;
 
-    public Task(String name, String description, boolean isImportant, List<Email> emailList) {
-        this.name = name;
-        this.description = description;
-        this.isImportant = isImportant;
-        this.emailList = emailList;
-    }
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne
+    private Border border;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "task_email",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "email_id"))
+    private List<Email> emailList;
 }

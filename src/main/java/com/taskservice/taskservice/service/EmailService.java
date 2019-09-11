@@ -19,7 +19,7 @@ public class EmailService {
     }
 
     public Email getEmailByName(String email) {
-        return emailRepository.findByEmail(email).orElseThrow(() -> new EmailNotFoundException(email));
+        return emailRepository.findByName(email).orElseThrow(() -> new EmailNotFoundException(email));
     }
 
     public Email addEmail(Email email) {

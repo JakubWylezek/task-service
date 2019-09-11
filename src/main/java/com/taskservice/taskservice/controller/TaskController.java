@@ -37,6 +37,16 @@ public class TaskController {
         }
     }
 
+    @PutMapping("/tasks")
+    public ResponseEntity updateTask(@RequestBody Task task) {
+        try {
+            taskService.addTask(task);
+            return ResponseEntity.created(new URI("/tasks/" + task.getName())).build();
+        } catch (URISyntaxException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+    }
+
     @DeleteMapping
     public ResponseEntity deleteTask(@RequestBody Task task) {
         taskService.deleteTask(task);

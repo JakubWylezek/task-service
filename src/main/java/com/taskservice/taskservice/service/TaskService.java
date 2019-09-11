@@ -13,6 +13,7 @@ import java.util.List;
 public class TaskService {
 
     private TaskRepository taskRepository;
+    private BorderService borderService;
 
     public List<Task> getTasks() {
         return taskRepository.findAll();
