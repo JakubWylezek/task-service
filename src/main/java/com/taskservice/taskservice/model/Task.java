@@ -1,12 +1,9 @@
 package com.taskservice.taskservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,5 +24,6 @@ public class Task {
     @ManyToOne
     private Border border;
 
+    @ElementCollection
     private List<String> emailList;
 }

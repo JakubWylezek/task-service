@@ -1,5 +1,6 @@
 package com.taskservice.taskservice.service;
 
+import com.taskservice.taskservice.api.service.EmailService;
 import com.taskservice.taskservice.exception.custom.TaskNotFoundException;
 import com.taskservice.taskservice.model.Task;
 import com.taskservice.taskservice.respository.TaskRepository;
@@ -13,6 +14,7 @@ import java.util.List;
 public class TaskService {
 
     private TaskRepository taskRepository;
+    private EmailService emailService;
 
     public List<Task> getTasks() {
         return taskRepository.findAll();
@@ -23,6 +25,8 @@ public class TaskService {
     }
 
     public Task addTask(Task task) {
+        if(task.isImportant())
+            emailService.sendEmails(task);
         return taskRepository.save(task);
     }
 
