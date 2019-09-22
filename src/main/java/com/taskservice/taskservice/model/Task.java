@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,9 +27,5 @@ public class Task {
     @ManyToOne
     private Border border;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "task_email",
-            joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "email_id"))
-    private List<Email> emailList;
+    private List<String> emailList;
 }

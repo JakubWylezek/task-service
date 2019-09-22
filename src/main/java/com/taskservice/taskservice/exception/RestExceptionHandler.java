@@ -1,6 +1,5 @@
 package com.taskservice.taskservice.exception;
 
-import com.taskservice.taskservice.exception.custom.EmailNotFoundException;
 import com.taskservice.taskservice.exception.custom.TaskNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -52,14 +51,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.METHOD_NOT_ALLOWED)
                 .build());
-    }
-
-    @ExceptionHandler(EmailNotFoundException.class)
-    private ResponseEntity<Object> handleFoodNotFoundException(EmailNotFoundException ex) {
-        return buildResponseEntity(ApiError.builder()
-                .message(ex.getMessage())
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.NOT_FOUND).build());
     }
 
     @ExceptionHandler(TaskNotFoundException.class)
