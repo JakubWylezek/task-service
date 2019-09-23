@@ -1,5 +1,6 @@
 package com.taskservice.taskservice.exception;
 
+import com.taskservice.taskservice.exception.custom.DuplicateTaskException;
 import com.taskservice.taskservice.exception.custom.TaskNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -59,6 +60,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(ex.getMessage())
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @ExceptionHandler(DuplicateTaskException.class)
+    protected ResponseEntity<Object> handleEmailExistException(DuplicateTaskException ex) {
+        return buildResponseEntity(ApiError.builder()
+                .message(ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT).build());
     }
 
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {

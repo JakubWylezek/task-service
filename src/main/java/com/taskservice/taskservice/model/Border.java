@@ -2,6 +2,8 @@ package com.taskservice.taskservice.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class Border {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "border", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "border")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Task> tasks;
 }

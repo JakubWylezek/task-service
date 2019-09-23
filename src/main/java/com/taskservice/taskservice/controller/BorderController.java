@@ -30,4 +30,10 @@ public class BorderController {
     public ResponseEntity<Border> addBorder(@RequestBody Border border) {
         return new ResponseEntity<>(borderService.addBorder(border), HttpStatus.CREATED);
     }
+
+    @PutMapping("/border")
+    public ResponseEntity<Border> updateBorder(@RequestBody Border border) {
+        borderService.addBorder(border);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
